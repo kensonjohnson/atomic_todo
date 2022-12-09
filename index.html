@@ -12,7 +12,7 @@
     <header>
       <div class="title">Atomic Todo App</div>
       <nav>
-        <!-- <a class="nav-link" href="/">Home</a> -->
+        <a class="nav-link" href="https://kensonjohnson.github.io/atomic_todo/">Home</a>
         <a class="nav-link" href="https://github.com/kensonjohnson/atomic_todo"
           >Source</a
         >
@@ -20,15 +20,85 @@
     </header>
     <section class="page-sidebar">
       <h2 class="group-container-title">Groups</h2>
-      <ul class="group-container">
-        <li class="group-item active-group-item">Grocery</li>
-        <li class="group-item">Word Project</li>
-        <li class="group-item">Fitness</li>
-      </ul>
+      <div class="group-container">
+        <div tabindex="0" class="group-item active-group-item">Grocery</div>
+        <div tabindex="0" class="group-item">
+          Word Project with a really long title that had to wrap
+        </div>
+        <div tabindex="0" class="group-item">Fitness</div>
+        <form action="" class="add-form">
+          <input
+            type="text"
+            class="add-group-item"
+            placeholder="Add New Group"
+            aria-label="Add New Group"
+          />
+          <button class="add-btn" aria-label="Create New Group" data-add-group>
+            +
+          </button>
+        </form>
+      </div>
     </section>
-    <section class="page-main"><p>List</p></section>
+    <section class="page-main">
+      <div class="list">
+        <h2 class="list-name">List Name</h2>
+        <div class="list-item">
+          <input type="checkbox" id="task-1" data-list-item="1" />
+          <label class="list-item-label" for="task-1">
+            <span class="custom-checkbox"></span>
+            Record Video
+          </label>
+        </div>
+        <div class="list-item">
+          <input type="checkbox" id="task-2" data-list-item="2" />
+          <label class="list-item-label" for="task-2">
+            <span class="custom-checkbox"></span>
+            Finsh UI
+          </label>
+        </div>
+        <div class="list-item">
+          <input type="checkbox" id="task-3" data-list-item="3" />
+          <label class="list-item-label" for="task-3">
+            <span class="custom-checkbox"></span>
+            Make Supper
+          </label>
+        </div>
+        <div class="list-item">
+          <input type="checkbox" id="task-4" data-list-item="4" />
+          <label class="list-item-label" for="task-4">
+            <span class="custom-checkbox"></span>
+            Workout
+          </label>
+        </div>
+        <form action="" class="add-form">
+          <input
+            type="text"
+            class="add-group-item"
+            placeholder="Add New List Item"
+            aria-label="Add New List Item"
+            maxlength="35"
+          />
+          <button
+            class="add-btn"
+            aria-label="Create New List Item"
+            data-add-list-item
+          >
+            +
+          </button>
+        </form>
+        <button
+          class="clear-btn"
+          aria-label="clear-completed tasks"
+          data-clear-tasks
+        >
+          Clear Completed Tasks
+        </button>
+      </div>
+    </section>
     <footer>
-      Built by <a href="https://github.com/kensonjohnson">Kenson Johnson</a>
+      <div>
+        Built by <a href="https://github.com/kensonjohnson">Kenson Johnson</a>
+      </div>
     </footer>
   </body>
 </html>
