@@ -18,7 +18,7 @@ body {
   margin: 0;
   font: 500 100% system-ui, sans-serif;
   display: grid;
-  grid-template-columns: minmax(20rem, 1fr) minmax(40rem, 2fr);
+  grid-template-columns: minmax(20rem, 350px) minmax(40rem, 2fr);
   grid-template-rows: min-content min-content 1fr min-content;
 }
 
@@ -59,6 +59,7 @@ a:hover {
 
 .group-container-title {
   width: 80%;
+  max-width: 350px;
   text-align: center;
   box-shadow: 0px 4px 10px -8px black;
   padding-bottom: 1rem;
@@ -78,7 +79,6 @@ a:hover {
   font-weight: 700;
   box-shadow: 0px 4px 10px -8px black;
   padding-left: 5%;
-  /* add transitions to padding-left changes */
 }
 
 .group-item.active-group-item:focus {
@@ -137,16 +137,16 @@ a:hover {
   grid-column: 2/3;
   grid-row: 2/4;
   background: var(--clr-primary);
-  padding: 1rem;
+  padding: 2rem 1rem;
 }
 
 .list {
-  /* position: relative; */
   display: flex;
   flex-direction: column;
+  max-width: 650px;
   margin: auto;
   background-color: var(--clr-light);
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
   width: 90%;
   height: 100%;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -157,6 +157,7 @@ a:hover {
   align-self: center;
   width: 80%;
   margin-bottom: 1rem;
+  padding-bottom: 1rem;
   box-shadow: 0px 4px 10px -8px black;
 }
 
@@ -239,13 +240,16 @@ a:hover {
   margin-top: 0;
 }
 
-.clear-btn{
+.clear-btn {
   border: none;
-  font-size: .9rem;
+  margin: 0 auto;
+  width: fit-content;
+  font-size: 0.9rem;
   font-weight: 700;
   background-color: inherit;
   color: var(--clr-extra);
   opacity: 0.8;
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {
@@ -259,14 +263,12 @@ a:hover {
   }
   .page-sidebar {
     margin: auto;
-    margin-top: 1rem;
-    width: 90%;
-    border-radius: 1rem;
+    width: 100%;
     background-color: var(--clr-light);
   }
 
   .page-main {
-    margin: 1rem auto;
+    margin: 2rem auto;
     width: 100%;
     padding: 0;
   }
