@@ -28,7 +28,7 @@
           Word Project
         </div>
         <div tabindex="0" class="group-item">Fitness</div>
-        <form action="" class="add-form">
+        <form action="" class="add-group-form">
           <input
             type="text"
             class="add-group-item"
@@ -45,13 +45,15 @@
     <section class="page-main">
       <div class="list">
         <h2 class="list-name">List Name</h2>
+        <div class="list-item-container">
         <div class="list-item">
           <input type="checkbox" id="task-1" data-list-item="1" />
-          <label class="list-item-label" for="task-1">
+          <label class="list-item-label" >
             <span class="custom-checkbox"></span>
             Record Video
           </label>
         </div>
+        
         <div class="list-item">
           <input type="checkbox" id="task-2" data-list-item="2" />
           <label class="list-item-label" for="task-2">
@@ -73,7 +75,7 @@
             Workout
           </label>
         </div>
-        <form action="" class="add-form">
+        <form action="" class="add-list-item-form">
           <input
             type="text"
             class="add-group-item"
@@ -89,6 +91,8 @@
             +
           </button>
         </form>
+        </div>
+        
         <button
           class="clear-btn"
           aria-label="clear-completed tasks"
