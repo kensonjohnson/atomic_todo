@@ -308,10 +308,10 @@ a:hover {
   height: 24px;
   position: relative;
   margin: 0.5rem;
+  cursor: pointer;
+
 }
 .list-item-icon {
-  width: 24px;
-  height: 24px;
   opacity: 0.5;
   background-image: url("images/collapse_icon.svg");
   transform: rotate(-90deg);
@@ -360,7 +360,7 @@ a:hover {
   padding-left: 2rem;
 }
 
-.delete-section{
+.delete-section {
   display: flex;
   justify-content: space-around;
 }
@@ -378,7 +378,7 @@ a:hover {
   margin-bottom: 1rem;
 }
 
-.delete-btn{
+.delete-btn {
   color: var(--clr-warning);
 }
 
