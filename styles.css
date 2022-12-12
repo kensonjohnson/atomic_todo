@@ -108,7 +108,8 @@ a:hover {
   padding-left: 5%;
 }
 
-.add-group-item {
+.add-group-item,
+.add-list-item {
   border: 0;
   background-color: inherit;
   outline: none;
@@ -117,6 +118,16 @@ a:hover {
   width: 100%;
 }
 
+.add-btn {
+  border: none;
+  width: 24px;
+  padding: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  background-color: inherit;
+  color: var(--clr-dark);
+  opacity: 0.7;
+}
 .add-group-item:hover,
 .add-group-item:focus,
 .add-btn:hover,
@@ -124,29 +135,19 @@ a:hover {
   opacity: 0.9;
 }
 
-.add-btn {
-  border: none;
-  font-size: 2rem;
-  font-weight: 700;
-  background-color: inherit;
-  color: var(--clr-dark);
-  opacity: 0.7;
-}
-
 .page-main {
   grid-column: 2/3;
   grid-row: 2/4;
   background: var(--clr-primary);
-  padding: 2rem 1rem;
+  padding: 2rem;
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  max-width: 650px;
+  width: 45rem;
   margin: auto;
   background-color: var(--clr-light);
-  width: 90%;
   height: 100%;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
@@ -187,7 +188,8 @@ a:hover {
 
 .list-item {
   margin: 1rem 2rem 0 2rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
   height: min-content;
   outline: none;
   position: relative;
@@ -203,11 +205,14 @@ a:hover {
   width: 95%;
 }
 
+.list-item-title {
+  display: flex;
+}
+
 .list-item-label {
   cursor: pointer;
   width: 100%;
   height: min-content;
-  display: inline-block;
   position: relative;
   font-size: inherit;
 }
@@ -251,7 +256,7 @@ a:hover {
   position: absolute;
   left: 0;
   right: 0;
-  top: 0.7rem;
+  top: 0.85rem;
   left: 1.5em;
   height: 3px;
   background: currentColor;
@@ -265,14 +270,99 @@ a:hover {
   transform-origin: left;
 }
 
+.expanded-list-content {
+  height: min-content;
+  display: none;
+  width: 100%;
+  padding-left: 2rem;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.show {
+  display: flex;
+}
+
+.list-item-description {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.list-item-actions {
+  display: flex;
+  font-size: 1rem;
+}
+
+.list-item-edit-button,
+.list-item-delete-button {
+  border: none;
+  margin: 0.5rem;
+  width: 24px;
+  height: 24px;
+  background-color: inherit;
+  cursor: pointer;
+}
+.list-item-flag,
+.list-item-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  margin: 0.5rem;
+}
+.list-item-icon {
+  width: 24px;
+  height: 24px;
+  opacity: 0.5;
+  background-image: url("images/collapse_icon.svg");
+  transform: rotate(-90deg);
+}
+
+.list-item-title:hover > .list-item-icon {
+  opacity: 1;
+}
+
+.expanded {
+  opacity: 1;
+  background-image: url("images/expand_icon.svg");
+}
+
+.list-item-flag select {
+  display: none;
+}
+
+.flag-low-priority {
+  background-image: url("images/flag_low_priority.svg");
+}
+
+.flag-normal-priority {
+  background-image: url("images/flag_normal_priority.svg");
+}
+
+.flag-high-priority {
+  background-image: url("images/flag_high_priority.svg");
+}
+
+.list-item-edit-button {
+  background: url("images/edit_icon.svg");
+}
+
+.list-item-delete-button {
+  background: url("images/delete_icon.svg");
+}
+
 .add-list-item-form {
-  margin: 1rem;
-  width: inherit;
+  margin: 1rem 2rem;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   align-content: center;
   box-shadow: 0px 11px 15px -15px black;
   padding-left: 2rem;
+}
+
+.delete-section{
+  display: flex;
+  justify-content: space-around;
 }
 
 .clear-btn {
@@ -282,10 +372,14 @@ a:hover {
   font-size: 0.9rem;
   font-weight: 700;
   background-color: inherit;
-  color: var(--clr-extra);
+  color: var(--clr-primary);
   opacity: 0.8;
   cursor: pointer;
   margin-bottom: 1rem;
+}
+
+.delete-btn{
+  color: var(--clr-warning);
 }
 
 @media (max-width: 600px) {
@@ -305,8 +399,21 @@ a:hover {
 
   .page-main {
     margin: 2rem auto;
-    width: 100%;
+    width: 90%;
     padding: 0;
+  }
+  .list {
+    width: 100%;
+  }
+
+  .list-item,
+  .add-list-item,
+  .list-item-actions {
+    font-size: 0.75rem;
+  }
+
+  .list-item-description {
+    font-size: 0.65rem;
   }
 
   .active-group-item {

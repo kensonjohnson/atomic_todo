@@ -24,9 +24,7 @@
       <h2 class="group-container-title">Groups</h2>
       <div class="group-container">
         <div tabindex="0" class="group-item active-group-item">Grocery</div>
-        <div tabindex="0" class="group-item">
-          Word Project
-        </div>
+        <div tabindex="0" class="group-item">Word Project</div>
         <div tabindex="0" class="group-item">Fitness</div>
         <form action="" class="add-group-form">
           <input
@@ -46,60 +44,144 @@
       <div class="list">
         <h2 class="list-name">List Name</h2>
         <div class="list-item-container">
-        <div class="list-item">
-          <input type="checkbox" id="task-1" data-list-item="1" />
-          <label class="list-item-label" >
-            <span class="custom-checkbox"></span>
-            Record Video
-          </label>
+          <div class="list-item">
+            <div class="list-item-title">
+              <input type="checkbox" id="task-1" data-list-item="1" />
+              <label class="list-item-label" for="task-1">
+                <span class="custom-checkbox"></span>
+                Record Video
+              </label>
+              <div class="list-item-icon expanded"></div>
+            </div>
+            <div class="expanded-list-content show">
+              <div class="list-item-description">
+                Description of the list item
+              </div>
+              <div class="list-item-actions">
+                <div class="list-item-flag flag-high-priority">
+                  <select>
+                    <option value="0">Low</option>
+                    <option value="1">Normal</option>
+                    <option value="2">High</option>
+                  </select>
+                </div>
+                <button class="list-item-edit-button"></button>
+                <button class="list-item-delete-button"></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="list-item-title">
+              <input type="checkbox" id="task-1" data-list-item="1" />
+              <label class="list-item-label" for="task-1">
+                <span class="custom-checkbox"></span>
+                Finsh UI
+              </label>
+              <div class="list-item-icon"></div>
+            </div>
+            <div class="expanded-list-content">
+              <div class="list-item-description">
+                Description of the list item
+              </div>
+              <div class="list-item-actions">
+                <div class="list-item-flag flag-high-priority">
+                  <select>
+                    <option value="0">Low</option>
+                    <option value="1">Normal</option>
+                    <option value="2">High</option>
+                  </select>
+                </div>
+                <button class="list-item-edit-button"></button>
+                <button class="list-item-delete-button"></button>
+              </div>
+            </div>
+          </div>
+          <div class="list-item">
+            <div class="list-item-title">
+              <input type="checkbox" id="task-1" data-list-item="1" />
+              <label class="list-item-label" for="task-1">
+                <span class="custom-checkbox"></span>
+                Make Supper
+              </label>
+              <div class="list-item-icon"></div>
+            </div>
+            <div class="expanded-list-content">
+              <div class="list-item-description">
+                Description of the list item
+              </div>
+              <div class="list-item-actions">
+                <div class="list-item-flag flag-high-priority">
+                  <select>
+                    <option value="0">Low</option>
+                    <option value="1">Normal</option>
+                    <option value="2">High</option>
+                  </select>
+                </div>
+                <button class="list-item-edit-button"></button>
+                <button class="list-item-delete-button"></button>
+              </div>
+            </div>
+          </div>
+          <div class="list-item">
+            <div class="list-item-title">
+              <input type="checkbox" id="task-1" data-list-item="1" />
+              <label class="list-item-label" for="task-1">
+                <span class="custom-checkbox"></span>
+                Workout
+              </label>
+              <div class="list-item-icon"></div>
+            </div>
+            <div class="expanded-list-content">
+              <div class="list-item-description">
+                Description of the list item
+              </div>
+              <div class="list-item-actions">
+                <div class="list-item-flag flag-high-priority">
+                  <select>
+                    <option value="0">Low</option>
+                    <option value="1">Normal</option>
+                    <option value="2">High</option>
+                  </select>
+                </div>
+                <button class="list-item-edit-button"></button>
+                <button class="list-item-delete-button"></button>
+              </div>
+            </div>
+          </div>
+          <form action="" class="add-list-item-form">
+            <input
+              type="text"
+              class="add-list-item"
+              placeholder="Add New List Item"
+              aria-label="Add New List Item"
+              maxlength="40"
+            />
+            <button
+              class="add-btn"
+              aria-label="Create New List Item"
+              data-add-list-item
+            >
+              +
+            </button>
+          </form>
         </div>
-        
-        <div class="list-item">
-          <input type="checkbox" id="task-2" data-list-item="2" />
-          <label class="list-item-label" for="task-2">
-            <span class="custom-checkbox"></span>
-            Finsh UI
-          </label>
-        </div>
-        <div class="list-item">
-          <input type="checkbox" id="task-3" data-list-item="3" />
-          <label class="list-item-label" for="task-3">
-            <span class="custom-checkbox"></span>
-            Make Supper
-          </label>
-        </div>
-        <div class="list-item">
-          <input type="checkbox" id="task-4" data-list-item="4" />
-          <label class="list-item-label" for="task-4">
-            <span class="custom-checkbox"></span>
-            Workout
-          </label>
-        </div>
-        <form action="" class="add-list-item-form">
-          <input
-            type="text"
-            class="add-group-item"
-            placeholder="Add New List Item"
-            aria-label="Add New List Item"
-            maxlength="40"
-          />
+        <div class="delete-section">
           <button
-            class="add-btn"
-            aria-label="Create New List Item"
-            data-add-list-item
+            class="clear-btn"
+            aria-label="clear-completed tasks"
+            data-clear-tasks
           >
-            +
+            Clear Completed Tasks
           </button>
-        </form>
+          <button
+            class="clear-btn delete-btn"
+            aria-label="clear-completed tasks"
+            data-clear-tasks
+          >
+            Delete List
+          </button>
         </div>
-        
-        <button
-          class="clear-btn"
-          aria-label="clear-completed tasks"
-          data-clear-tasks
-        >
-          Clear Completed Tasks
-        </button>
       </div>
     </section>
     <footer>
