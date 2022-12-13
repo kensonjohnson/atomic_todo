@@ -18,8 +18,9 @@ body {
   margin: 0;
   font: 500 100% system-ui, sans-serif;
   display: grid;
-  grid-template-columns: minmax(20rem, 350px) minmax(40rem, 2fr);
+  grid-template-columns: 20rem minmax(20rem, 2fr);
   grid-template-rows: min-content min-content 1fr min-content;
+  overflow: hidden;
 }
 
 header,
@@ -59,7 +60,6 @@ a:hover {
 
 .group-container-title {
   width: 80%;
-  max-width: 350px;
   text-align: center;
   box-shadow: 0px 4px 10px -8px black;
   padding-bottom: 1rem;
@@ -145,17 +145,19 @@ a:hover {
 .list {
   display: flex;
   flex-direction: column;
-  width: 45rem;
   margin: auto;
   background-color: var(--clr-light);
   height: 100%;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  overflow-x: scroll;
+  max-width: 42rem;
+  overflow-x: scroll;
 }
 
 .list-name {
   text-align: center;
   align-self: center;
-  width: 80%;
+  width: 42rem;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   box-shadow: 0px 4px 10px -8px black;
@@ -163,7 +165,9 @@ a:hover {
 
 .list-item-container {
   overflow-y: auto;
+  overflow-x: hidden;
   height: 100%;
+  width: 42rem;
 }
 
 /* custom scrollbar */
@@ -180,6 +184,10 @@ a:hover {
   border-radius: 20px;
   border: 6px solid transparent;
   background-clip: content-box;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: var(--clr-dark);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -201,7 +209,7 @@ a:hover {
   border-bottom: 1px solid black;
   background-color: black;
   left: 1.5rem;
-  bottom: -0.3rem;
+  bottom: 0;
   width: 95%;
 }
 
@@ -211,10 +219,14 @@ a:hover {
 
 .list-item-label {
   cursor: pointer;
+  display: inline;
   width: 100%;
-  height: min-content;
+  height: 100%;
   position: relative;
   font-size: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 [type="checkbox"] {
@@ -240,9 +252,8 @@ a:hover {
 }
 
 .list-item:hover .custom-checkbox,
-[type="checkbox"]:focus + label .custom-checkbox {
-  transform: scale(1.2);
-  color: var(--clr-primary);
+[type="checkbox"]:focus + .list-item-label .custom-checkbox {
+  border-color: var(--clr-primary);
 }
 
 [type="checkbox"]:checked + label .custom-checkbox {
@@ -251,7 +262,7 @@ a:hover {
   box-shadow: inset 0 0 0px 2px white;
 }
 
-.list-item label::after {
+.list-item-label::after {
   content: "";
   position: absolute;
   left: 0;
@@ -309,11 +320,9 @@ a:hover {
   position: relative;
   margin: 0.5rem;
   cursor: pointer;
-
 }
 .list-item-icon {
   opacity: 0.5;
-  background-image: url("images/collapse_icon.svg");
   transform: rotate(-90deg);
 }
 
@@ -323,7 +332,12 @@ a:hover {
 
 .expanded {
   opacity: 1;
-  background-image: url("images/expand_icon.svg");
+}
+
+.expanded img {
+  src: url("images/expand_icon.svg");
+  width: 24px;
+  height: 24px;
 }
 
 .list-item-flag select {
@@ -363,6 +377,7 @@ a:hover {
 .delete-section {
   display: flex;
   justify-content: space-around;
+  width: 42rem;
 }
 
 .clear-btn {
@@ -382,7 +397,7 @@ a:hover {
   color: var(--clr-warning);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 47rem) {
   body {
     grid-template-columns: minmax(30rem, 1fr);
     grid-template-rows: min-content min-content auto min-content;
@@ -397,13 +412,34 @@ a:hover {
     background-color: var(--clr-light);
   }
 
+  .active-group-item {
+    margin: auto;
+    width: 90%;
+    background-color: var(--clr-primary);
+    border-radius: 1rem;
+  }
+
   .page-main {
     margin: 2rem auto;
     width: 90%;
     padding: 0;
   }
-  .list {
+
+  .list,
+  .list-name,
+  .list-item,
+  .list-item-title,
+  .list-item-container,
+  .delete-section {
     width: 100%;
+  }
+  .list-item-container {
+    min-width: 30rem;
+  }
+
+  .list-item {
+    margin: 0;
+    padding: 1rem;
   }
 
   .list-item,
@@ -412,14 +448,34 @@ a:hover {
     font-size: 0.75rem;
   }
 
-  .list-item-description {
-    font-size: 0.65rem;
+  .list-item-title {
+    align-items: center;
   }
 
-  .active-group-item {
-    margin-left: 5%;
+  .list-item label::after {
+    top: 0.55rem;
+    height: 2px;
+    margin: 0;
+  }
+
+  .list-item-description {
+    font-size: 0.65rem;
+    margin: 0.25rem;
+  }
+
+  .list-item-icon {
+    transform: rotate(-90deg) scale(0.8);
+    margin: 0.25rem;
+  }
+  .list-item-flag,
+  .list-item-edit-button,
+  .list-item-delete-button {
+    transform: scale(0.8);
+    margin: 0.25rem;
+  }
+
+  .add-list-item-form {
     width: 90%;
-    background-color: var(--clr-primary);
-    border-radius: 1rem;
+    margin: 1rem auto;
   }
 }
