@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A todo manager app written in JavaScript",
   "main": "script.js",
+  "type": "module",
   "scripts": {
     "test": "jest",
     "watch": "jest --watch"
@@ -22,6 +23,7 @@
     "jest": "^29.3.1"
   },
   "dependencies": {
-    "date-fns": "^2.29.3"
+    "date-fns": "^2.29.3",
+    "uuid": "^9.0.0"
   }
 }

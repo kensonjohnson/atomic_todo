@@ -1,14 +1,16 @@
 import { getUnixTime, toDate } from "date-fns";
+import { v4 as uuidv4 } from "uuid";
 
 export default class Todo {
   constructor(
     title,
     parentList,
-    description = null,
-    priority = null,
-    notes = null,
-    checklist = null
+    description = "",
+    priority = 2,
+    notes = "",
+    checklist = []
   ) {
+    this.id = uuidv4();
     this.title = title;
     this.parentList = parentList;
     this.description = description;
@@ -16,6 +18,11 @@ export default class Todo {
     this.notes = notes;
     this.checklist = checklist;
     this.dateCreated = getUnixTime(new Date());
+    return this.id;
+  }
+
+  get id() {
+    return this.id;
   }
 
   get title() {
