@@ -320,6 +320,7 @@ a:hover {
   position: relative;
   margin: 0.5rem;
   cursor: pointer;
+  color: transparent;
 }
 .list-item-icon {
   opacity: 0.5;
@@ -332,12 +333,9 @@ a:hover {
 
 .expanded {
   opacity: 1;
-}
-
-.expanded img {
-  src: url("images/expand_icon.svg");
-  width: 24px;
-  height: 24px;
+  background-image: url("images/expand_icon.svg");
+  /* width: 24px;
+  height: 24px; */
 }
 
 .list-item-flag select {
