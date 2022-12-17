@@ -8,6 +8,7 @@ export class Todo {
   title: string;
   description: string = "Click to add description";
   priority: number = 1;
+  completed: boolean = false;
 
   constructor(title = "New Item") {
     this.title = title;

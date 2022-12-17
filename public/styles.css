@@ -150,7 +150,7 @@ a:hover {
   height: 100%;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   overflow-x: scroll;
-  max-width: 42rem;
+  width: 42rem;
   overflow-x: scroll;
 }
 
@@ -182,7 +182,7 @@ a:hover {
 ::-webkit-scrollbar-thumb {
   background-color: var(--clr-primary);
   border-radius: 20px;
-  border: 6px solid transparent;
+  border: 4px solid transparent;
   background-clip: content-box;
 }
 
@@ -201,6 +201,7 @@ a:hover {
   height: min-content;
   outline: none;
   position: relative;
+  transition: position 1000ms;
 }
 
 .list-item::after {
@@ -214,13 +215,16 @@ a:hover {
 }
 
 .list-item-title {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .list-item-label {
-  cursor: pointer;
   display: inline;
-  width: 100%;
+  width: 85%;
   height: 100%;
   position: relative;
   font-size: inherit;
@@ -229,26 +233,28 @@ a:hover {
   white-space: nowrap;
 }
 
-[type="checkbox"] {
-  opacity: 0;
-  position: absolute;
-  left: -0.25rem;
-  top: 0.05rem;
+.clickable {
   cursor: pointer;
-  z-index: 10;
 }
 
 .custom-checkbox {
-  --size: 0.75em;
+  --size: 0.9em;
   display: inline-block;
   width: var(--size);
   height: var(--size);
-  margin-right: var(--size);
+  margin: 0.1rem;
   cursor: pointer;
   border: 2px solid var(--clr-dark);
   border-radius: 50%;
-  transform: scale(1);
-  transition: transform 300ms ease-in-out;
+}
+
+[type="checkbox"] {
+  display: none;
+  opacity: 1;
+  cursor: pointer;
+  height: inherit;
+  width: inherit;
+  z-index: 10;
 }
 
 .list-item:hover .custom-checkbox,
@@ -256,9 +262,9 @@ a:hover {
   border-color: var(--clr-primary);
 }
 
-[type="checkbox"]:checked + label .custom-checkbox {
-  background: var(--clr-dark);
-  border-color: var(--clr-dark);
+[type="checkbox"]:checked + .custom-checkbox {
+  background: var(--clr-primary);
+  border-color: var(--clr-primary);
   box-shadow: inset 0 0 0px 2px white;
 }
 
@@ -268,43 +274,55 @@ a:hover {
   left: 0;
   right: 0;
   top: 0.85rem;
-  left: 1.5em;
   height: 3px;
-  background: currentColor;
+  background: black;
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform 150ms ease-in-out;
+  transition: transform 125ms ease-in-out;
 }
 
-[type="checkbox"]:checked + label::after {
+.list-item-label.completed::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
 .expanded-list-content {
-  height: min-content;
-  display: none;
+  display: flex;
+  height: 0;
+  visibility: collapse;
   width: 100%;
-  padding-left: 2rem;
+  padding-left: 1.5rem;
   justify-content: space-between;
   margin-top: 0.5rem;
+  opacity: 0;
+  transition: height 300ms, opacity 200ms, visibility 300ms;
 }
 
 .show {
-  display: flex;
+  height: 88px;
+  opacity: 1;
+  visibility: visible;
 }
 
 .list-item-description {
+  cursor: pointer;
   font-size: 1rem;
   opacity: 0.7;
+  padding-left: 0.5rem;
+  border-radius: 1rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.editing {
+  border: 1px solid black;
 }
 
 .list-item-actions {
   display: flex;
-  font-size: 1rem;
+  flex-direction: column;
+  align-items: center;
 }
 
-.list-item-edit-button,
 .list-item-delete-button {
   border: none;
   margin: 0.5rem;
@@ -312,19 +330,26 @@ a:hover {
   height: 24px;
   background-color: inherit;
   cursor: pointer;
+  background: url("images/delete_icon.svg");
 }
+
+.list-item-flag {
+  margin: 0.5rem;
+  position: relative;
+}
+
 .list-item-flag,
 .list-item-icon {
   width: 24px;
-  height: 24px;
+  min-height: 24px;
   position: relative;
-  margin: 0.5rem;
   cursor: pointer;
-  color: transparent;
 }
 .list-item-icon {
+  margin-right: 0.5rem;
   opacity: 0.5;
   transform: rotate(-90deg);
+  background: url("images/collapse_icon.svg");
 }
 
 .list-item-title:hover > .list-item-icon {
@@ -334,12 +359,20 @@ a:hover {
 .expanded {
   opacity: 1;
   background-image: url("images/expand_icon.svg");
-  /* width: 24px;
-  height: 24px; */
 }
 
-.list-item-flag select {
-  display: none;
+select {
+  position: absolute;
+  opacity: 0;
+  height: 24px;
+  width: 24px;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+option {
+  background-color: var(--clr-light);
 }
 
 .flag-low-priority {
@@ -352,14 +385,6 @@ a:hover {
 
 .flag-high-priority {
   background-image: url("images/flag_high_priority.svg");
-}
-
-.list-item-edit-button {
-  background: url("images/edit_icon.svg");
-}
-
-.list-item-delete-button {
-  background: url("images/delete_icon.svg");
 }
 
 .add-list-item-form {
@@ -456,6 +481,10 @@ a:hover {
     margin: 0;
   }
 
+  .show {
+    height: 64px;
+  }
+
   .list-item-description {
     font-size: 0.65rem;
     margin: 0.25rem;
@@ -466,7 +495,6 @@ a:hover {
     margin: 0.25rem;
   }
   .list-item-flag,
-  .list-item-edit-button,
   .list-item-delete-button {
     transform: scale(0.8);
     margin: 0.25rem;
