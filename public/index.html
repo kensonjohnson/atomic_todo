@@ -21,28 +21,32 @@
       </nav>
     </header>
     <section class="page-sidebar">
-      <h2 class="group-container-title">Groups</h2>
-      <div class="group-container">
+      <h2 class="group-container-title">Your Lists</h2>
+      <div class="group-container" data-list-group-container>
         <div tabindex="0" class="group-item active-group-item">Grocery</div>
-        <div tabindex="0" class="group-item">Word Project</div>
-        <div tabindex="0" class="group-item">Fitness</div>
-        <form action="" class="add-group-form">
-          <input
-            type="text"
-            class="add-group-item"
-            placeholder="Add New Group"
-            aria-label="Add New Group"
-            maxlength="30"
-          />
-          <button class="add-btn" aria-label="Create New Group" data-add-group>
-            +
-          </button>
-        </form>
+      </div>
+      <div id="add-list-form">
+        <input
+          type="text"
+          class="add-group-item"
+          placeholder="Add New List"
+          aria-label="Add New List"
+          maxlength="30"
+          data-add-list-input
+        />
+        <button
+          class="add-btn"
+          form="add-list-form"
+          aria-label="Create New Group"
+          data-add-list
+        >
+          +
+        </button>
       </div>
     </section>
     <section class="page-main">
       <div class="list">
-        <h2 class="list-name">List Name</h2>
+        <h2 class="list-name" data-list-title>Grocery</h2>
         <div class="list-item-container">
           <div class="list-items" data-list-items></div>
           <form action="" class="add-list-item-form">

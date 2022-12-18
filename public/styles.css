@@ -98,7 +98,7 @@ a:hover {
   border-radius: 1rem 0 0 1rem;
 }
 
-.add-group-form {
+#add-list-form {
   width: 90%;
   display: flex;
   justify-content: space-between;

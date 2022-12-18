@@ -1,28 +1,73 @@
 import { Todo } from "./todo";
-import type { List } from "./defs";
-// import { v4 as uuidv4 } from "uuid";
+import type { Group, List, GroupItem } from "./defs";
+import { v4 as uuidv4 } from "uuid";
+
+const listGroup: Group = [];
 
 const todoList: List = new Map();
 
+const listGroupContainerDiv: HTMLDivElement = document.querySelector(
+  "[data-list-group-container]"
+) as HTMLDivElement;
+const addListInput: HTMLInputElement = document.querySelector(
+  "[data-add-list-input]"
+) as HTMLInputElement;
+const addNewListButton: HTMLButtonElement = document.querySelector(
+  "[data-add-list]"
+) as HTMLButtonElement;
 const listItemContainerDiv: HTMLDivElement = document.querySelector(
   "[data-list-items]"
 ) as HTMLDivElement;
+const listTitle: HTMLHeadingElement = document.querySelector(
+  "[data-list-title]"
+) as HTMLHeadingElement;
 const addListItemInput: HTMLInputElement = document.querySelector(
   "[data-add-list-item-input]"
 ) as HTMLInputElement;
 const addListItemButton: HTMLButtonElement = document.querySelector(
   "[data-add-list-item-button]"
 ) as HTMLButtonElement;
-
 const clearCompletedButton: HTMLButtonElement = document.querySelector(
   "[data-clear-tasks]"
 ) as HTMLButtonElement;
+const deleteListButton: HTMLButtonElement = document.querySelector(
+  "[data-delete-list]"
+) as HTMLButtonElement;
+
+function createList(listName: string = "New List") {
+  const newList = { id: uuidv4(), name: listName, list: new Map() as List };
+  listGroup.push(newList);
+  addListToHTML(newList); //TODO
+}
+
+function addListToHTML(listObject: GroupItem) {
+  const allGroupItems = document.querySelectorAll(".group-item");
+  allGroupItems.forEach((item) => {
+    item.classList.remove("active-group-item");
+  });
+  listTitle.innerText = listObject.name;
+  // <div tabindex="0" class="group-item active-group-item">Grocery</div>
+  const groupItem = document.createElement("div");
+  groupItem.classList.add("group-item", "active-group-item");
+  groupItem.setAttribute("tabindex", "0");
+  groupItem.innerText = listObject.name;
+  groupItem.id = listObject.id;
+  groupItem.onclick = () => {
+    const allGroupItems = document.querySelectorAll(".group-item");
+    allGroupItems.forEach((item) => {
+      item.classList.remove("active-group-item");
+    });
+    groupItem.classList.add("active-group-item");
+    listTitle.innerText = listObject.name;
+  };
+  listGroupContainerDiv.appendChild(groupItem);
+}
 
 function createTodo(title?: string) {
   return new Todo(title);
 }
 
-function addListItem(todo: Todo) {
+function addTodoToHTML(todo: Todo) {
   // <div class="list-item">
   const listItem = document.createElement("div");
   listItem.classList.add("list-item");
@@ -196,7 +241,7 @@ addListItemButton.addEventListener("click", (e) => {
   const title: string = addListItemInput.value;
   addListItemInput.value = "";
   const newTodo: Todo = title === "" ? createTodo() : createTodo(title);
-  addListItem(newTodo);
+  addTodoToHTML(newTodo);
   todoList.set(newTodo.id, newTodo);
   console.log(todoList.size);
 });
@@ -211,4 +256,22 @@ clearCompletedButton.addEventListener("click", () => {
       todoList.delete(todo.id);
     }
   });
+});
+
+addNewListButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (addListInput.value === "") {
+    createList();
+  } else {
+    createList(addListInput.value);
+  }
+});
+
+deleteListButton.addEventListener("click", () => {
+  let deleteList: boolean = confirm(
+    "Are you sure?\nThis action cannot be undone."
+  );
+  if (deleteList) {
+    listItemContainerDiv.innerHTML = "";
+  }
 });
