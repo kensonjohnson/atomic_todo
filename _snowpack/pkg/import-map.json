@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "date-fns/toDate": "./date-fns/toDate.js",
+    "uuid": "./uuid.js"
+  }
+}
