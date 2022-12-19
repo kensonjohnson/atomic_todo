@@ -4,19 +4,17 @@ export default {
     public: { url: "/", static: true },
     src: { url: "/dist" },
   },
+  optimize: {
+    bundle: true,
+    minify: true,
+    target: "es2018",
+  },
   plugins: [
     [
       "@snowpack/plugin-typescript",
       {
         /* Yarn PnP workaround: see https://www.npmjs.com/package/@snowpack/plugin-typescript */
         ...(process.versions.pnp ? { tsc: "yarn pnpify tsc" } : {}),
-      },
-    ],
-    [
-      "@snowpack/plugin-webpack",
-      {
-        sourceMap: true,
-        outputPattern: { css: "styles.css", js: "[name].index.js" },
       },
     ],
   ],
