@@ -189,6 +189,7 @@ function addTodoToHTML(todo, todoList) {
     } else {
       todo.completed = false;
     }
+    storeListLocal();
   });
   listItemTitle.appendChild(customCheckbox);
   const listItemLabel = document.createElement("label");
@@ -210,6 +211,7 @@ function addTodoToHTML(todo, todoList) {
         listItemLabel.innerText = "New Item";
       }
       todo.title = listItemLabel.innerText;
+      storeListLocal();
     };
   };
   listItemTitle.appendChild(listItemLabel);
@@ -257,6 +259,7 @@ function addTodoToHTML(todo, todoList) {
       todoDescription.innerText = "Click to add description";
     }
     todo.description = todoDescription.innerText;
+    storeListLocal();
   };
   menuDropdown.appendChild(todoDescription);
   const actionsContainer = document.createElement("div");
@@ -267,6 +270,7 @@ function addTodoToHTML(todo, todoList) {
   deleteButton.onclick = () => {
     todoList.delete(todo.id);
     listItemContainerDiv.removeChild(listItem);
+    storeListLocal();
   };
   actionsContainer.appendChild(deleteButton);
   const priorityFlag = document.createElement("div");
@@ -338,6 +342,7 @@ var addListItemInput = document.querySelector("[data-add-list-item-input]");
 var addListItemButton = document.querySelector("[data-add-list-item-button]");
 var clearCompletedButton = document.querySelector("[data-clear-tasks]");
 var deleteListButton2 = document.querySelector("[data-delete-list]");
+recallLocal();
 function createList(listName = "New List") {
   const newList = {id: v4(), name: listName, list: new Map()};
   listGroup.push(newList);
@@ -351,6 +356,45 @@ function createList(listName = "New List") {
   currentList = newList.list;
   renderList(newList);
 }
+function storeListLocal() {
+  let data = [];
+  listGroup.forEach((groupItem) => {
+    const newObject = {
+      id: groupItem.id,
+      name: groupItem.name,
+      list: Array.from(groupItem.list.entries())
+    };
+    data.push(JSON.stringify(newObject));
+  });
+  window.localStorage.setItem("Atomic_Todo", JSON.stringify(data));
+}
+function recallLocal() {
+  const result = window.localStorage.getItem("Atomic_Todo");
+  if (typeof result === "string") {
+    listGroup = [];
+    const parsedJSON = JSON.parse(result);
+    parsedJSON.forEach((stringifiedObject) => {
+      let parsedObject = JSON.parse(stringifiedObject);
+      const groupItem = {
+        id: parsedObject.id,
+        name: parsedObject.name,
+        list: new Map(parsedObject.list)
+      };
+      listGroup.push(groupItem);
+      const tempGroupItem = addListToGroupHTML(groupItem);
+      tempGroupItem.addEventListener("click", () => {
+        updateSelectedList(groupItem);
+        currentList = groupItem.list;
+      });
+      listGroupContainerDiv.appendChild(tempGroupItem);
+    });
+    currentList = listGroup[0].list;
+    updateSelectedList(listGroup[0]);
+    renderList(listGroup[0]);
+  } else {
+    listGroup = [];
+  }
+}
 addNewListButton.addEventListener("click", (e) => {
   e.preventDefault();
   if (addListInput.value === "") {
@@ -359,12 +403,12 @@ addNewListButton.addEventListener("click", (e) => {
     createList(addListInput.value);
     addListInput.value = "";
   }
+  storeListLocal();
 });
 deleteListButton2.addEventListener("click", (e) => {
   let result = confirm("Are you sure?\nThis action cannot be undone.");
   if (result) {
     const listID = deleteListButton2.dataset.deleteList;
-    console.log(listID);
     deleteListFromHTML(listID);
     const indexToRemove = listGroup.findIndex((groupItem) => {
       if (groupItem.id === listID) {
@@ -375,6 +419,7 @@ deleteListButton2.addEventListener("click", (e) => {
     if (indexToRemove >= 0 && indexToRemove < listGroup.length) {
       listGroup.splice(indexToRemove, 1);
     }
+    storeListLocal();
   }
   if (listGroup.length === 0) {
     createList();
@@ -383,6 +428,7 @@ deleteListButton2.addEventListener("click", (e) => {
     renderList(defaultList);
     deleteListButton2.setAttribute("data-delete-list", defaultList.id);
   }
+  storeListLocal();
 });
 addListItemButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -391,16 +437,16 @@ addListItemButton.addEventListener("click", (e) => {
   const newTodo = title === "" ? new Todo() : new Todo(title);
   addTodoToHTML(newTodo, currentList);
   currentList.set(newTodo.id, newTodo);
+  storeListLocal();
 });
 clearCompletedButton.addEventListener("click", () => {
   currentList.forEach((todo) => {
     clearCompletedFromHTML(todo);
     currentList.delete(todo.id);
   });
+  storeListLocal();
 });
-console.log("outside");
 if (listGroup.length === 0) {
-  console.log("inside");
   createList("Grocery List");
   const sampleTodo1 = new Todo("Eggs");
   currentList.set(sampleTodo1.id, sampleTodo1);
@@ -411,5 +457,9 @@ if (listGroup.length === 0) {
   sampleTodo3.open = true;
   currentList.set(sampleTodo3.id, sampleTodo3);
   renderList(listGroup[0]);
+  storeListLocal();
 }
+export {
+  storeListLocal
+};
 //# sourceMappingURL=index.js.map
