@@ -4,11 +4,11 @@ export default {
     public: { url: "/", static: true },
     src: { url: "/dist" },
   },
-  optimize: {
-    bundle: true,
-    minify: true,
-    target: "es2018",
-  },
+  // optimize: {
+  //   bundle: true,
+  //   minify: false,
+  //   target: "es2018",
+  // },
   plugins: [
     [
       "@snowpack/plugin-typescript",
@@ -17,6 +17,12 @@ export default {
         ...(process.versions.pnp ? { tsc: "yarn pnpify tsc" } : {}),
       },
     ],
+    // [
+    //   "@snowpack/plugin-webpack",
+    //   {
+    //     /* see "Plugin Options" below */
+    //   },
+    // ],
   ],
   routes: [
     /* Enable an SPA Fallback in development: */
@@ -24,7 +30,7 @@ export default {
   ],
   optimize: {
     /* Example: Bundle your final build: */
-    // "bundle": true,
+    bundle: true,
   },
   packageOptions: {
     /* ... */
