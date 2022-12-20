@@ -1,5 +1,5 @@
 import { Todo } from "./todo";
-import type { Group, List } from "./defs";
+import type { Group, GroupItem, List } from "./defs";
 import { v4 as uuidv4 } from "uuid";
 import {
   addTodoToHTML,
@@ -10,7 +10,7 @@ import {
   updateSelectedList,
 } from "./DisplayController";
 
-const listGroup: Group = [];
+let listGroup: Group = [];
 
 let currentList: List = new Map();
 
@@ -36,6 +36,8 @@ const deleteListButton: HTMLButtonElement = document.querySelector(
   "[data-delete-list]"
 ) as HTMLButtonElement;
 
+recallLocal();
+
 function createList(listName: string = "New List") {
   const newList = { id: uuidv4(), name: listName, list: new Map() as List };
   listGroup.push(newList);
@@ -50,6 +52,48 @@ function createList(listName: string = "New List") {
   renderList(newList);
 }
 
+export function storeListLocal() {
+  let data: string[] = [];
+  listGroup.forEach((groupItem) => {
+    const newObject = {
+      id: groupItem.id,
+      name: groupItem.name,
+      list: Array.from(groupItem.list.entries()),
+    };
+    data.push(JSON.stringify(newObject));
+  });
+  window.localStorage.setItem("Atomic_Todo", JSON.stringify(data));
+}
+function recallLocal() {
+  const result = window.localStorage.getItem("Atomic_Todo");
+  if (typeof result === "string") {
+    listGroup = [];
+    const parsedJSON = JSON.parse(result);
+    // The result should be an array of strings
+    parsedJSON.forEach((stringifiedObject: string) => {
+      let parsedObject = JSON.parse(stringifiedObject);
+      // console.log(parsedObject);
+      const groupItem: GroupItem = {
+        id: parsedObject.id,
+        name: parsedObject.name,
+        list: new Map(parsedObject.list),
+      };
+      listGroup.push(groupItem);
+      const tempGroupItem = addListToGroupHTML(groupItem);
+      tempGroupItem.addEventListener("click", () => {
+        updateSelectedList(groupItem);
+        currentList = groupItem.list;
+      });
+      listGroupContainerDiv.appendChild(tempGroupItem);
+    });
+    currentList = listGroup[0].list;
+    updateSelectedList(listGroup[0]);
+    renderList(listGroup[0]);
+  } else {
+    listGroup = [];
+  }
+}
+
 // Event Listeners
 
 addNewListButton.addEventListener("click", (e) => {
@@ -60,6 +104,7 @@ addNewListButton.addEventListener("click", (e) => {
     createList(addListInput.value);
     addListInput.value = "";
   }
+  storeListLocal();
 });
 
 deleteListButton.addEventListener("click", (e) => {
@@ -67,7 +112,6 @@ deleteListButton.addEventListener("click", (e) => {
   //delete the item from HTML and the Group of lists
   if (result) {
     const listID = deleteListButton.dataset.deleteList;
-    console.log(listID);
     deleteListFromHTML(listID);
     const indexToRemove = listGroup.findIndex((groupItem) => {
       if (groupItem.id === listID) {
@@ -78,6 +122,7 @@ deleteListButton.addEventListener("click", (e) => {
     if (indexToRemove >= 0 && indexToRemove < listGroup.length) {
       listGroup.splice(indexToRemove, 1);
     }
+    storeListLocal();
   }
 
   // If that was the last group, create a new default list
@@ -88,6 +133,7 @@ deleteListButton.addEventListener("click", (e) => {
     renderList(defaultList);
     deleteListButton.setAttribute("data-delete-list", defaultList.id);
   }
+  storeListLocal();
 });
 
 addListItemButton.addEventListener("click", (e) => {
@@ -97,6 +143,7 @@ addListItemButton.addEventListener("click", (e) => {
   const newTodo: Todo = title === "" ? new Todo() : new Todo(title);
   addTodoToHTML(newTodo, currentList);
   currentList.set(newTodo.id, newTodo);
+  storeListLocal();
 });
 
 clearCompletedButton.addEventListener("click", () => {
@@ -104,12 +151,11 @@ clearCompletedButton.addEventListener("click", () => {
     clearCompletedFromHTML(todo);
     currentList.delete(todo.id);
   });
+  storeListLocal();
 });
-console.log("outside");
 
 // Sample Data
 if (listGroup.length === 0) {
-  console.log("inside");
   createList("Grocery List");
   const sampleTodo1 = new Todo("Eggs");
   currentList.set(sampleTodo1.id, sampleTodo1);
@@ -120,4 +166,5 @@ if (listGroup.length === 0) {
   sampleTodo3.open = true;
   currentList.set(sampleTodo3.id, sampleTodo3);
   renderList(listGroup[0]);
+  storeListLocal();
 }

@@ -1,5 +1,6 @@
 import type { Todo } from "./todo";
 import type { List, GroupItem } from "./defs";
+import { storeListLocal } from "./index";
 
 const listItemContainerDiv: HTMLDivElement = document.querySelector(
   "[data-list-items]"
@@ -27,23 +28,12 @@ export function addListToGroupHTML(listObject: GroupItem) {
   allGroupItems.forEach((item) => {
     item.classList.remove("active-group-item");
   });
-  // <div tabindex="0" class="group-item active-group-item">Grocery</div>
   const groupItem = document.createElement("div");
   groupItem.classList.add("group-item", "active-group-item");
   groupItem.setAttribute("tabindex", "0");
   groupItem.innerText = listObject.name;
   groupItem.id = listObject.id;
   deleteListButton.setAttribute("data-delete-list", groupItem.id);
-  //   groupItem.onclick = () => {
-  //     const allGroupItems = document.querySelectorAll(".group-item");
-  //     allGroupItems.forEach((item) => {
-  //       item.classList.remove("active-group-item");
-  //     });
-  //     groupItem.classList.add("active-group-item");
-  //     deleteListButton.setAttribute("data-delete-list", groupItem.id);
-  //     listTitle.innerText = listObject.name;
-  //     renderList(listObject);
-  //   };
   renderList(listObject);
   return groupItem;
 }
@@ -89,6 +79,7 @@ export function addTodoToHTML(todo: Todo, todoList: List) {
     } else {
       todo.completed = false;
     }
+    storeListLocal();
   });
   listItemTitle.appendChild(customCheckbox);
 
@@ -112,6 +103,7 @@ export function addTodoToHTML(todo: Todo, todoList: List) {
         listItemLabel.innerText = "New Item";
       }
       todo.title = listItemLabel.innerText;
+      storeListLocal();
     };
   };
   listItemTitle.appendChild(listItemLabel);
@@ -172,6 +164,7 @@ export function addTodoToHTML(todo: Todo, todoList: List) {
       todoDescription.innerText = "Click to add description";
     }
     todo.description = todoDescription.innerText;
+    storeListLocal();
   };
   menuDropdown.appendChild(todoDescription);
   //               </div>
@@ -187,6 +180,7 @@ export function addTodoToHTML(todo: Todo, todoList: List) {
   deleteButton.onclick = () => {
     todoList.delete(todo.id);
     listItemContainerDiv.removeChild(listItem);
+    storeListLocal();
   };
   actionsContainer.appendChild(deleteButton);
   //                 </button>
