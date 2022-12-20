@@ -1,1 +1,91 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><script src="/webpack-runtime.index.js"></script><script src="/dist/index.index.js"></script><link rel="stylesheet" href="styles.css"><title>Atomic Todo</title></head><body><header><div class="title">Atomic Todo App</div><nav><a class="nav-link" href="https://kensonjohnson.github.io/atomic_todo/">Home</a> <a class="nav-link" href="https://github.com/kensonjohnson/atomic_todo">Source</a></nav></header><section class="page-sidebar"><h2 class="group-container-title">Your Lists</h2><div class="group-container" data-list-group-container=""></div><div id="add-list-form"><input class="add-group-item" placeholder="Add New List" aria-label="Add New List" maxlength="30" data-add-list-input=""> <button class="add-btn" form="add-list-form" aria-label="Create New Group" data-add-list="">+</button></div></section><section class="page-main"><div class="list"><h2 class="list-name" data-list-title="">Grocery</h2><div class="list-item-container"><div class="list-items" data-list-items=""></div><form action="" class="add-list-item-form"><input class="add-list-item" placeholder="Add New List Item" aria-label="Add New List Item" data-add-list-item-input=""> <button class="add-btn" aria-label="Create New List Item" data-add-list-item-button="">+</button></form></div><div class="delete-section"><button class="clear-btn" aria-label="clear-completed tasks" data-clear-tasks="">Clear Completed Tasks</button> <button class="clear-btn delete-btn" aria-label="clear-completed tasks" data-delete-list="">Delete List</button></div></div></section><footer><div>Built by <a href="https://github.com/kensonjohnson">Kenson Johnson</a></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="dist/index.js" type="module"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Atomic Todo</title>
+  </head>
+  <body>
+    <header>
+      <div class="title">Atomic Todo App</div>
+      <nav>
+        <a class="nav-link" href="https://kensonjohnson.github.io/atomic_todo/"
+          >Home</a
+        >
+        <a class="nav-link" href="https://github.com/kensonjohnson/atomic_todo"
+          >Source</a
+        >
+      </nav>
+    </header>
+    <section class="page-sidebar">
+      <h2 class="group-container-title">Your Lists</h2>
+      <div class="group-container" data-list-group-container></div>
+      <div id="add-list-form">
+        <input
+          type="text"
+          class="add-group-item"
+          placeholder="Add New List"
+          aria-label="Add New List"
+          maxlength="30"
+          data-add-list-input
+        />
+        <button
+          class="add-btn"
+          form="add-list-form"
+          aria-label="Create New Group"
+          data-add-list
+        >
+          +
+        </button>
+      </div>
+    </section>
+    <section class="page-main">
+      <div class="list">
+        <h2 class="list-name" data-list-title>Grocery</h2>
+        <div class="list-item-container">
+          <div class="list-items" data-list-items></div>
+          <form action="" class="add-list-item-form">
+            <input
+              type="text"
+              class="add-list-item"
+              placeholder="Add New List Item"
+              aria-label="Add New List Item"
+              data-add-list-item-input
+            />
+            <button
+              class="add-btn"
+              aria-label="Create New List Item"
+              data-add-list-item-button
+            >
+              +
+            </button>
+          </form>
+        </div>
+        <div class="delete-section">
+          <button
+            class="clear-btn"
+            aria-label="clear-completed tasks"
+            data-clear-tasks
+          >
+            Clear Completed Tasks
+          </button>
+          <button
+            class="clear-btn delete-btn"
+            aria-label="clear-completed tasks"
+            data-delete-list
+          >
+            Delete List
+          </button>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div>
+        Built by <a href="https://github.com/kensonjohnson">Kenson Johnson</a>
+      </div>
+    </footer>
+  </body>
+</html>

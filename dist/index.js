@@ -77,7 +77,9 @@ clearCompletedButton.addEventListener("click", () => {
     currentList.delete(todo.id);
   });
 });
+console.log("outside");
 if (listGroup.length === 0) {
+  console.log("inside");
   createList("Grocery List");
   const sampleTodo1 = new Todo("Eggs");
   currentList.set(sampleTodo1.id, sampleTodo1);
