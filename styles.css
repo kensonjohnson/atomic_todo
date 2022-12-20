@@ -1,3 +1,4 @@
+/* build/styles.css */
 :root {
   --clr-primary: #669bbc;
   --clr-light: #fdf0d5;
@@ -5,13 +6,11 @@
   --clr-warning: #c1121f;
   --clr-extra: #780000;
 }
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-
 body {
   background: var(--clr-primary);
   height: 100vh;
@@ -22,7 +21,6 @@ body {
   grid-template-rows: min-content min-content 1fr min-content;
   overflow: hidden;
 }
-
 header,
 footer {
   display: flex;
@@ -33,22 +31,18 @@ footer {
   color: var(--clr-light);
   background: var(--clr-dark);
 }
-
 nav {
   display: flex;
   gap: 1rem;
   align-items: center;
 }
-
 a {
   text-decoration: none;
   color: var(--clr-light);
 }
-
 a:hover {
   color: var(--clr-primary);
 }
-
 .page-sidebar {
   grid-column: 1/2;
   grid-row: 2/4;
@@ -57,20 +51,17 @@ a:hover {
   align-items: center;
   background: var(--clr-light);
 }
-
 .group-container-title {
   width: 80%;
   text-align: center;
   box-shadow: 0px 4px 10px -8px black;
   padding-bottom: 1rem;
 }
-
 .group-container {
   width: 100%;
   line-height: 3;
   padding-bottom: 1rem;
 }
-
 .group-item {
   cursor: pointer;
   width: 90%;
@@ -80,16 +71,13 @@ a:hover {
   box-shadow: 0px 4px 10px -8px black;
   padding-left: 5%;
 }
-
 .group-item.active-group-item:focus {
   outline: auto;
 }
-
 .group-item:hover:not(.active-group-item),
 .group-item:focus:not(.active-group-item) {
   transform: scale(1.05);
 }
-
 .active-group-item {
   width: 100%;
   margin-left: 5%;
@@ -97,7 +85,6 @@ a:hover {
   background-color: var(--clr-primary);
   border-radius: 1rem 0 0 1rem;
 }
-
 #add-list-form {
   width: 90%;
   display: flex;
@@ -107,7 +94,6 @@ a:hover {
   box-shadow: 0px 11px 15px -15px black;
   padding-left: 5%;
 }
-
 .add-group-item,
 .add-list-item {
   border: 0;
@@ -117,7 +103,6 @@ a:hover {
   opacity: 0.5;
   width: 100%;
 }
-
 .add-btn {
   border: none;
   width: 24px;
@@ -134,14 +119,12 @@ a:hover {
 .add-btn:focus {
   opacity: 0.9;
 }
-
 .page-main {
   grid-column: 2/3;
   grid-row: 2/4;
   background: var(--clr-primary);
   padding: 2rem;
 }
-
 .list {
   display: flex;
   flex-direction: column;
@@ -153,7 +136,6 @@ a:hover {
   width: 42rem;
   overflow-x: scroll;
 }
-
 .list-name {
   text-align: center;
   align-self: center;
@@ -162,38 +144,30 @@ a:hover {
   padding-bottom: 1rem;
   box-shadow: 0px 4px 10px -8px black;
 }
-
 .list-item-container {
   overflow-y: auto;
   overflow-x: hidden;
   height: 100%;
   width: 42rem;
 }
-
-/* custom scrollbar */
 ::-webkit-scrollbar {
   width: 20px;
 }
-
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
   background-color: var(--clr-primary);
   border-radius: 20px;
   border: 4px solid transparent;
   background-clip: content-box;
 }
-
 .list::-webkit-scrollbar-thumb {
   background-color: var(--clr-dark);
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--clr-dark);
 }
-
 .list-item {
   margin: 1rem 2rem 0 2rem;
   font-size: 1.2rem;
@@ -203,7 +177,6 @@ a:hover {
   position: relative;
   transition: position 1000ms;
 }
-
 .list-item::after {
   content: "";
   position: absolute;
@@ -213,7 +186,6 @@ a:hover {
   bottom: 0;
   width: 95%;
 }
-
 .list-item-title {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -221,7 +193,6 @@ a:hover {
   align-items: center;
   justify-content: space-between;
 }
-
 .list-item-label {
   display: inline;
   width: 85%;
@@ -232,11 +203,9 @@ a:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 .clickable {
   cursor: pointer;
 }
-
 .custom-checkbox {
   --size: 0.9em;
   display: inline-block;
@@ -247,8 +216,7 @@ a:hover {
   border: 2px solid var(--clr-dark);
   border-radius: 50%;
 }
-
-[type="checkbox"] {
+[type=checkbox] {
   display: none;
   opacity: 1;
   cursor: pointer;
@@ -256,18 +224,15 @@ a:hover {
   width: inherit;
   z-index: 10;
 }
-
 .list-item:hover .custom-checkbox,
-[type="checkbox"]:focus + .list-item-label .custom-checkbox {
+[type=checkbox]:focus + .list-item-label .custom-checkbox {
   border-color: var(--clr-primary);
 }
-
-[type="checkbox"]:checked + .custom-checkbox {
+[type=checkbox]:checked + .custom-checkbox {
   background: var(--clr-primary);
   border-color: var(--clr-primary);
   box-shadow: inset 0 0 0px 2px white;
 }
-
 .list-item-label::after {
   content: "";
   position: absolute;
@@ -280,12 +245,10 @@ a:hover {
   transform-origin: right;
   transition: transform 125ms ease-in-out;
 }
-
 .list-item-label.completed::after {
   transform: scaleX(1);
   transform-origin: left;
 }
-
 .expanded-list-content {
   display: flex;
   height: 0;
@@ -295,15 +258,16 @@ a:hover {
   justify-content: space-between;
   margin-top: 0.5rem;
   opacity: 0;
-  transition: height 300ms, opacity 200ms, visibility 300ms;
+  transition:
+    height 300ms,
+    opacity 200ms,
+    visibility 300ms;
 }
-
 .show {
   height: 88px;
   opacity: 1;
   visibility: visible;
 }
-
 .list-item-description {
   cursor: pointer;
   font-size: 1rem;
@@ -318,13 +282,11 @@ a:hover {
 .editing {
   border: 1px solid black;
 }
-
 .list-item-actions {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .list-item-delete-button {
   border: none;
   margin: 0.5rem;
@@ -332,14 +294,12 @@ a:hover {
   height: 24px;
   background-color: inherit;
   cursor: pointer;
-  background: url("images/delete_icon.svg");
+  background: url(images/delete_icon.svg);
 }
-
 .list-item-flag {
   margin: 0.5rem;
   position: relative;
 }
-
 .list-item-flag,
 .list-item-icon {
   width: 24px;
@@ -351,18 +311,15 @@ a:hover {
   margin-right: 0.5rem;
   opacity: 0.5;
   transform: rotate(-90deg);
-  background: url("images/collapse_icon.svg");
+  background: url(images/collapse_icon.svg);
 }
-
 .list-item-title:hover > .list-item-icon {
   opacity: 1;
 }
-
 .expanded {
   opacity: 1;
-  background-image: url("images/expand_icon.svg");
+  background-image: url(images/expand_icon.svg);
 }
-
 select {
   position: absolute;
   opacity: 0;
@@ -372,23 +329,18 @@ select {
   padding: 0;
   outline: none;
 }
-
 option {
   background-color: var(--clr-light);
 }
-
 .flag-low-priority {
-  background-image: url("images/flag_low_priority.svg");
+  background-image: url(images/flag_low_priority.svg);
 }
-
 .flag-normal-priority {
-  background-image: url("images/flag_normal_priority.svg");
+  background-image: url(images/flag_normal_priority.svg);
 }
-
 .flag-high-priority {
-  background-image: url("images/flag_high_priority.svg");
+  background-image: url(images/flag_high_priority.svg);
 }
-
 .add-list-item-form {
   margin: 1rem 2rem;
   width: 90%;
@@ -398,13 +350,11 @@ option {
   box-shadow: 0px 11px 15px -15px black;
   padding-left: 2rem;
 }
-
 .delete-section {
   display: flex;
   justify-content: space-around;
   width: 42rem;
 }
-
 .clear-btn {
   border: none;
   margin: 0 auto;
@@ -417,11 +367,9 @@ option {
   cursor: pointer;
   margin-bottom: 1rem;
 }
-
 .delete-btn {
   color: var(--clr-warning);
 }
-
 @media (max-width: 47rem) {
   body {
     grid-template-columns: minmax(30rem, 1fr);
@@ -436,20 +384,17 @@ option {
     width: 100%;
     background-color: var(--clr-light);
   }
-
   .active-group-item {
     margin: auto;
     width: 90%;
     background-color: var(--clr-primary);
     border-radius: 1rem;
   }
-
   .page-main {
     margin: 2rem auto;
     width: 90%;
     padding: 0;
   }
-
   .list,
   .list-name,
   .list-item,
@@ -461,37 +406,30 @@ option {
   .list-item-container {
     min-width: 30rem;
   }
-
   .list-item {
     margin: 0;
     padding: 1rem;
   }
-
   .list-item,
   .add-list-item,
   .list-item-actions {
     font-size: 0.75rem;
   }
-
   .list-item-title {
     align-items: center;
   }
-
   .list-item label::after {
     top: 0.55rem;
     height: 2px;
     margin: 0;
   }
-
   .show {
     height: 64px;
   }
-
   .list-item-description {
     font-size: 0.65rem;
     margin: 0.25rem;
   }
-
   .list-item-icon {
     transform: rotate(-90deg) scale(0.8);
     margin: 0.25rem;
@@ -501,7 +439,6 @@ option {
     transform: scale(0.8);
     margin: 0.25rem;
   }
-
   .add-list-item-form {
     width: 90%;
     margin: 1rem auto;
